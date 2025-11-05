@@ -22,10 +22,10 @@ class InscripcionStoreRequest extends FormRequest
                 'required',
                 'integer',
                 'exists:actividades,id',
-                Rule::unique('inscripciones')->where(function ($query)  =>
-                    $query->where('alumno_id', $this->'alumno_id')
-            ),
-                ],
+                Rule::unique('inscripciones')->where(fn ($q)  =>
+                    $q->where('alumno_id',$this->alumno_id)
+                ),
+            ],
         ];
     }
 
