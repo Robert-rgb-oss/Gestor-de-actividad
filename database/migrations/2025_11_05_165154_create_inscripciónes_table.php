@@ -9,7 +9,7 @@ return new class extends Migration
    
     public function up(): void
     {
-        Schema::create('inscripciónes', function (Blueprint $table) {
+        Schema::create('inscripciones', function (Blueprint $table) {
             $table->id();
             $table->foreingId('actividad_id')->constrained()->onDelete('cascade');
             $table->foreingId('alumno_id')->constrained()->onDelete('cascade');
