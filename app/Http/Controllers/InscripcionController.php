@@ -26,11 +26,11 @@ class InscripcionController extends Controller
 
     
     public function store(InscripcionRequest $request)
-    {
-        $existe = Inscripcion::where('alumno_id', $request->alumno_id)
+    
+    {  $existe = Inscripcion::where('alumno_id', $request->alumno_id)
             ->where('actividad_id', $request->actividad_id)
             ->exist();
-        if ($existe) {
+        if ($existe)
             return back()->withErrors(['El alumno ya está inscrito.']);
             inscripcion ::create($request->all());
             return redirect()->route('inscripciones.index')
@@ -51,19 +51,25 @@ class InscripcionController extends Controller
         return view('inscripciones.edit', compact('inscripcion', 'alumnos', 'actividades'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+   
+    public function update(Request $request, Inscripcion $inscripcion)
     {
-        //
+        $inscripcion->where('alumno_id', $request->alumno_id)
+        ->where('actividad_id', $request->actividad_id)
+        ->exist();
+        if($existe){
+            return back()->withErrors(['Ya existe una inscripción para este alumno.']);
+        }
+        $inscripcion->update($request->all());
+        return redirect()->route('inscripciones.index')
+            ->with('success','La actualización de la inscripción se ha realizado con éxito!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    
+    public function destroy(Inscripcion $inscripcion)
     {
-        //
+       $inscripcion->delete();
+       return redirect()->route('inscripciones.index')
+            ->with('success','Inscripción eliminada con éxito!'); 
     }
 }
