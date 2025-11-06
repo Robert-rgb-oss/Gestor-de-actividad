@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class InscripcionStoreRequest extends FormRequest
+class InscripcionRequest extends FormRequest
 {
     
     public function authorize(): bool
@@ -26,6 +26,8 @@ class InscripcionStoreRequest extends FormRequest
                     $q->where('alumno_id',$this->alumno_id)
                 ),
             ],
+            'fecha_inscripcion' => ['required','date'],
+            'estado' => ['required','in:pendiente,aceptada,cancelada'],
         ];
     }
 
