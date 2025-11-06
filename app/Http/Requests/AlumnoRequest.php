@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ActividadStoreRequest extends FormRequest
+class AlumnoRequest extends FormRequest
 {
     
     public function authorize(): bool
@@ -17,9 +17,8 @@ class ActividadStoreRequest extends FormRequest
     {
         return [
             'nombre' => ['required','string','max:120'],
-            'descripcion' => ['required','string','max:1000'],
-            'dia' => ['required','string','in:Lunes,Martes,Miércoles,Jueves,Viernes'],
-            'horario' => ['required','in:am,pm'],
+            'curso' => ['required','string','max:60'],
+            'edad' => ['required','integer','between:3,99'],
         ];
     }
 }
