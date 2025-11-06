@@ -3,62 +3,77 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Actividad;
+use App\Http\Request\ActividadRequest;
+
 
 class ActividadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    
+    public function index(Request $request)
     {
-        //
+        $query = Actividad::query();
+
+        if($request->filled('search')){
+            $search = $request->input('search');
+            $query->where('nombre','like',"%{$search}%")
+                ->orWhere('dia','like',"%{$search}%");
+        }
+
+        $actividades = $query->orderBy('nombre')->paginate(9)->withQueryString();
+
+        return view('actividades.index', compact('actividades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
-        //
+        return view('actividades.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function store(ActividadRequest $request)
     {
-        //
+        Actividad::create($request->all());
+
+        return redirect()->route('actividades.index')
+            ->with('success','Actividad creada con éxito!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+   
+    public function show(Actividad $actividad)
     {
-        //
+        $actividad->load('inscripciones.alumno');
+        return view('actividades.show', compact('actividad'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    
+    public function edit(Actividad $actividad)
     {
-        //
+        return view('actividades.edit', compact('actividad'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    
+    public function update(ActividadRequest $request, Actividad $actividad)
     {
-        //
+        $actividad->update($request->all());
+        return redirect()->route('actividades.index')
+            ->with('success','Actividad actualizada con éxito!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+   
+    public function destroy(Actividad $actividad)
     {
-        //
+        $actividad->delete();
+        return redirect()->route('actividades.index')
+            ->with('success','Actividad eliminada con éxito!');
+    }
+
+    public function listadoConAlumnos(){
+        $actividades = Actividad::with(['inscripciones.alumno' => function($query){
+            $query->orderBy('nombre');
+        }])->get();
+
+        return view('actividades.listado', compact('actividades'));
     }
 }
