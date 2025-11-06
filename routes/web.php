@@ -7,16 +7,16 @@ use App\Http\Controllers\AlumnoController;
 
 Route::get('/', function () {
     return view('welcome');
-});->name('home');
+})->name('home');
 
-Route::resource('actividades', 'ActividadController::class)->parameters([
+Route::resource('actividades', ActividadController::class)->parameters([
     'actividades' => 'actividad']);
 
-Route::resource('inscripciones', 'InscripcionController::class)->parameters([
+Route::resource('inscripciones', InscripcionController::class)->parameters([
     'inscripciones' => 'inscripcion']);
 
-Route::resource('alumnos', 'AlumnoController::class);
+Route::resource('alumnos', AlumnoController::class);
 
 Route::get('/actividades-con-alumnos', [ActividadController::class, 'listadoConAlumnos'])
-->name('actividades.con-alumnos');
+->name('actividades.listado');
 
