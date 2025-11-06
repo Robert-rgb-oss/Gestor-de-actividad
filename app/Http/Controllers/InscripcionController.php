@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inscripcion;
+use App\Models\Actividad;
+use App\Models\Alumno;
 
 class InscripcionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $inscripciones = Inscripcion::with(['alumno', 'actividad'])->paginate(12);
+        return view('inscripciones.index', compact('inscripciones'));   
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
-        //
+        $alumnos = Alumno::all();
+        $actividades = Actividad::all();
+        return view('inscripciones.create', compact('alumnos', 'actividades'));
     }
 
     /**
