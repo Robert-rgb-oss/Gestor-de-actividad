@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('inscripciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('actividad_id')->constrained()->onDelete('cascade');
-            $table->foreignId('alumno_id')->constrained()->onDelete('cascade');
+            $table->foreignId('actividad_id')->constrained('actividades')->onDelete('cascade');
+            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->date('fecha_inscripcion')->default(now());
             $table->string('estado')->default('pendiente'); //ej.: pendiente, aceptada, cancelado
             $table->unique(['actividad_id','alumno_id']);
@@ -23,6 +23,6 @@ return new class extends Migration
    
     public function down(): void
     {
-        Schema::dropIfExists('inscripcions');
+        Schema::dropIfExists('inscripciones');
     }
 };
