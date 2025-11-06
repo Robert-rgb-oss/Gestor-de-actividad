@@ -13,8 +13,9 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion');
-            $table->string('día');
-            $table->string('horario');
+            $table->enum('día', ['lunes', 'martes', 'miércoles', 'jueves', 'viernes']);
+            $table->time('hora_inicio')
+            $table->time('hora_fin');
             $table->timestamps();
         });
     }
