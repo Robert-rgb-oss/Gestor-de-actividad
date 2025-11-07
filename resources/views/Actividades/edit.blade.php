@@ -32,10 +32,10 @@
                             <select name="dia" id="dia" class="form-control @error('dia') is-invalid @enderror"
                                 required>
                                 <option value="">Selecciona un día</option>
-                                @foreach (['lunes', 'martes', 'miércoles', 'jueves', 'viernes'] as $d)
+                                @foreach (['lunes', 'martes', 'miercoles', 'jueves', 'viernes'] as $d)
                                     <option value="{{ $d }}"
                                         {{ old('dia', $actividad->dia) == $d ? 'selected' : '' }}>
-                                        {{ ucfirst($d) }}
+                                        {{ ($d) }}
                                     </option>
                                 @endforeach
                             </select>

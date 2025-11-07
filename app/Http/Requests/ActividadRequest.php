@@ -18,7 +18,7 @@ class ActividadRequest extends FormRequest
         return [
             'nombre' => ['required','string','min:3','max:120'],
             'descripcion' => ['required'],
-            'dia' => ['required','in:Lunes,Martes,Miercoles,Jueves,Viernes'],
+            'dia' => ['required','in:lunes,martes,miercoles,jueves,viernes'],
             'hora_inicio' => ['required'],
             'hora_fin' => ['required','after:hora_inicio'],
         ];

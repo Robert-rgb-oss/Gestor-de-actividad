@@ -25,6 +25,7 @@
                         <th>Nombre</th>
                         <th>Día</th>
                         <th>Horario</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +56,7 @@
 
     @endif
     <div class="d-flex justify-content-center mt-4">
-        {{ $actividades-links('pagination::bootstrap-5') }}
+         {{ $actividades->links('pagination::bootstrap-5')}}
     </div>
 
 

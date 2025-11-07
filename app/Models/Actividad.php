@@ -9,7 +9,9 @@ class Actividad extends Model
 {
     use HasFactory;
 
-    protected $filiable = ['nombre','descripcion','dia','horario'];
+    protected $table = 'actividades';
+
+    protected $fillable = ['nombre','descripcion','dia','horario'];
 
     public function inscripciones(){
         return $this->hasMany(Inscripcion::class);
