@@ -49,7 +49,7 @@
         @yield('content')
     </main>
     <footer class="bg-light py-2 text-center">
-        &copy; 2025 Sistema de gestión escolar | Dearrollado por:
+        &copy; 2025 Sistema de gestión escolar | Desarrollado por:
     </footer>
     
 </body>
