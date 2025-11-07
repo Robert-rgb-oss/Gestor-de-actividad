@@ -41,4 +41,7 @@
             </div>
         </div>
     </div>
+    <div class="mt-5 text-center">
+        <p class="text-muted">&copy; 2025 Gestor de Actividades Escolares | Desarrollado por: </p>
+    </div>
 @endsection
