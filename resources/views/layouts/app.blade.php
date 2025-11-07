@@ -20,7 +20,37 @@
             </div>
         </nav>
 
+        <div class="container mt-4">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show alert-small" id="alert-success" role="alert">
+                    <small>{{ session('success') }}</small>
+                    <button type="button" class="btn-close btn-close-white"></button>
+                </div>
+
+            @endif
+
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show alert-small" id="alert-errors" role="alert">
+                    <small>
+                        Corrige los siguientes errores:
+                        <ul class="mb-0 mt-1">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </small>
+                    <button type="button" class="btn-close btn-close-white"></button>
+                </div>
+
+            @endif
+        </div>
+        
+
+        @yield('content')
     </main>
+    <footer class="bg-light py-2 text-center">
+        &copy; 2025 Sistema de gestión escolar | Dearrollado por:
+    </footer>
     
 </body>
 </html>
